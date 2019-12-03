@@ -24,7 +24,7 @@ import urllib
 import json
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 deviceId = "Dw50zW9r"
 deviceKey = "PoTAOlvLBK5U9FUr"
 def post_to_mcs(payload):
@@ -68,9 +68,9 @@ while True:
 	if h0 is not None and t0 is not None:
 		print('Temp={0:0.1f}* Humidity={1:0.1f}%'.format(t0, h0))
 		SwitchStatus=GPIO.input(24)
-		if(SwitchStatus == 1):
-			print('Button pressed')
 		if(SwitchStatus == 0):
+			print('Button pressed')
+		if(SwitchStatus == 1):
 			print('Button released')
 		payload = {"datapoints":[{"dataChnId":"Humidity","values":{"value":h0}}
 		,{"dataChnId":"Temperature","values":{"value":t0}}
